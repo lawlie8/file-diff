@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.TreeMap;
@@ -20,8 +21,8 @@ public class FileEval {
         return fileStream.count();
     }
 
-    public TreeMap<String,Integer> fetchLineHashes(String pathToFile) throws Exception{
-        TreeMap<String,Integer> hashTable = new TreeMap<>();
+    public HashMap<String,Integer> fetchLineHashes(String pathToFile) throws Exception{
+        HashMap<String,Integer> hashTable = new HashMap<>();
 
         FileInputStream fstream = new FileInputStream(pathToFile);
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -48,8 +49,8 @@ public class FileEval {
     
     public void appendMissingDelimeterLines (int count,String pathToFile) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile,true));
-        for (int i = 0; i < count; i++) {
-            writer.write(System.lineSeparator());
+        for (int i = 0; i < count + 1; i++) {
+            writer.newLine();
         }
         writer.close();
     }
